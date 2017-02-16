@@ -13,8 +13,21 @@ Run locally
     git clone https://github.com/djangocon/2017.djangocon.eu.git  # Clone the project
     cd 2017.djangocon.eu
 
-* Edit ``djangocon_europe/.env`` key according to your environment. See an example below.
-* Set up your virtualenv::
+* Create and edit the ``djangocon_europe/.env`` file to contain your secret data (used by `django-environ` so refer to that package documentation for further details)::
+
+    DATABASE_URL=psql://user@password:host:port/db_name
+    DEBUG=True
+    ALLOWED_HOSTS=["*"]
+    SECRET_KEY=my-secret-key
+    EMAIL_HOST=localhost
+    EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
+
+
+
+Note: the used version has a bug where null parameters are converted to None instead of empty string. You can get around that locally by fixing the package. See https://github.com/joke2k/django-environ/pull/57/files
+
+
+* Set up your virtualenv ::
 
     virtualenv --python=/usr/bin/python3.5 env                    # Start a virtualenv
     . env/bin/activate                                            # Use the virtualenv
@@ -22,25 +35,14 @@ Run locally
     pip install pip-tools
     pip-sync                                                      # Install dependencies
 
+Note: if you're using Ubuntu pip-sync will fail due to pgk-resources being uninstalled. Either use :code:`pip install -r requirements.txt` (and lose the sync function) or uncomment the #setuptools line in requirements.txt. See https://github.com/nvie/pip-tools/issues/389 and related
+
+
 * Set up the Django project::
 
     python manage.py migrate
     python manage.py runserver
 
-Example .env file
------------------
-
-Configuration uses `django-environ`_. Please refer to its document for the configuration details.
-
-Example::
-
-    DATABASE_URL=psql://postgres:@:5432/djangocon_europe
-    DEBUG=True
-    ALLOWED_HOSTS=["*"]
-    SECRET_KEY=my-secret-key
-    CACHE_URL=rediscache://127.0.0.1:6379:1
-    EMAIL_HOST=localhost
-    EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
 
 How this site works
 -------------------

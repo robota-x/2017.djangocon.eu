@@ -78,22 +78,6 @@
 </head>
 <body id="page-top" class="noscript lang-{{ LANGUAGE_CODE }} {% block body_class %}tpl-root{% endblock %}">
 {% cms_toolbar %}
-{% comment %}
-Enable when we are ready
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/57f61a0c4a427d157431d4fd/default';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
-{% endcomment %}
 {% block extend_root %}{% endblock %}
 
 {% compress js %}
